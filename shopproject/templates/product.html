@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+        {{product.des|truncatewords:155}}
+
+{% endblock %}
+{% block title %}
+    {% if category %}
+        {{product.name}} -ABC store
+    {% endif %}
+{% endblock %}
+{% block content %}
+<div>
+    <div>
+        <p><a href="{% url 'shopapp:allProduct' %}">Home</a> | <a href="{{product.category.get_url}}">{{product.category}}</a>| <b>{{product.name}}</b></p>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img class="images" src="{{product.img.url}}" alt="{{product.name}}">
+        </div>
+        <div class="col-md-6">
+            <h1>{{product.name}}</h1>
+            <P>${{product.price}}</P>
+            <h4>Product Description</h4>
+            <p>{{product.des}}</p>
+            {% if product.stock <= 0 %}
+                <p><b>Out of Stock</b></p>
+            {% else %}
+                <a class="btn btn-secondary" href="{% url 'cart:add_cart' product.id %}">Add to Cart</a>
+            {% endif %}
+        </div>
+        <br>
+    </div>
+</div>
+<br>
+{% endblock %}

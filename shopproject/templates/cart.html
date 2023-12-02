@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+    This is cart page
+{% endblock %}
+{% block title %}
+    Cart
+{% endblock %}
+{% block content %}
+    <div>
+        {% if not cart_items %}
+            <div>
+                <div class="text-center">
+                    <br>
+                    <h1>Your Cart is Empty</h1>
+                    <br>
+                    <p class="text-center">
+                        Click<a href="{% url 'shopapp:allProduct' %}">Here</a>to continue shopping
+                    </p>
+                </div>
+            </div>
+        {% else %}
+            <div>
+                <div class="text-center">
+                    <br>
+                    <h1 class="text-center">Your Cart</h1>
+                    <br>
+                </div>
+            </div>
+            <div class="row mx-auto">
+                <div class="col-md-6 text-center">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th colspan="5">
+                                Your Items
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for cart_item in cart_items %}
+                        <tr>
+                            <td>
+                                <a href="cart_item.product.get_absolute_url"><img src="{{cart_item.product.img.url}}" width="200px" height="180px" alt="img" class="float-left rounded"></a>
+                            </td>
+                            <td class="text-left">
+                                NAME: {{cart_item.product.name}}
+                                <br>
+                                SKU: {{cart_item.product.id}}
+                                <br>
+                                PRICE: ${{cart_item.product.price}}
+                                <br>
+                                Qty: {{cart_item.quantity}} X ${{cart_item.product.price}}
+                                <br>
+                            </td>
+                            <td class="text-left">
+                                $ {{cart_item.sub_total}}
+                            </td>
+                            {% if cart_item.quantity < cart_item.product.stock %}
+                            <td>
+                                <a href="{% url 'cart:add_cart' cart_item.product.id %}"> <i class="fa-solid fa-circle-plus"></i> </a>
+                                &nbsp;<a href="{% url 'cart:cart_remove' cart_item.product.id %}"> <i class="fa-solid fa-circle-minus"></i> </a>
+                                &nbsp;<a href="{% url 'cart:delete' cart_item.product.id %}"> <i class="fa-solid fa-trash-can"></i> </a>
+                            </td>
+                            {% else %}
+                             <td>
+                                &nbsp;<a href="{% url 'cart:cart_remove' cart_item.product.id %}"> <i class="fa-solid fa-circle-minus"></i> </a>
+                                &nbsp;<a href="{% url 'cart:delete' cart_item.product.id %}"> <i class="fa-solid fa-trash-can"></i> </a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6 text-center">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                Check out
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                please review your cart items before proceeding oder payment.
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="mx-auto">
+                        <a href="{% url 'shopapp:allProduct' %}" class="btn btn-secondary">continue</a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

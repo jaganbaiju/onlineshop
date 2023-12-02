@@ -1,0 +1,40 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+        Welcome to our shope
+
+{% endblock %}
+{% block title %}
+
+    search
+
+{% endblock %}
+{% block content %}
+    <div class="text-center">
+        <p>searched for:<b>"{{query}}"</b></p>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-4">
+                <div class="card p-3 shadow text-center" style="min-width:18rem;">
+                    <a href="{{product.get_url}}"><img class="image" src="{{product.img.url}}" alt="{{product.name}}"></a>
+                    <div class="card-body">
+                        <h3>{{product.name}}</h3>
+                        <p>{{product.price}}</p>
+                    </div>
+                </div>
+                <br>
+            </div>
+            <br>
+            {% empty %}
+                <div class="row mx-auto">
+                    <p class="text-center"> 0 result found</p>
+                </div>
+           {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

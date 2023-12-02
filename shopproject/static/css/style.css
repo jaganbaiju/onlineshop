@@ -1,0 +1,44 @@
+.logo{
+      height:200px;
+      width:200px;
+      }
+.banner{
+        height:480px;
+        width:auto;
+        padding-top:20px;
+       }
+.image{
+        height:200px;
+        width:100%;
+        }
+.cat_img{
+         height:500px;
+         width:1200px;
+         }
+.nav-item{
+          font-size:15px;
+          text-transform:uppercase;
+          letter-spacing:.1em;
+          }
+.images{
+        height:300px;
+        width:450px;
+        }
+.footer{
+        background-color:#636160;
+        padding-top:30px;
+        height:100px;
+        }
+body{
+      font-family: 'Hedvig Letters Serif', serif;
+      }
+.dropdown-menu{
+                font-size:13px;
+                }
+.cat_head{
+          font-size:18px;
+          text-transform:uppercase;
+          }
+.cat_heads{
+            text-transform:uppercase;
+            }
